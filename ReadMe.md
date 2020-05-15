@@ -3,10 +3,15 @@
 This is a self-hosting bot which can play any mp3 file you put into the sounds folder
 
 
-## configuration 
+## configuration
+
 you can configure the bot in the .env file. You only really need to change the bot token and prefix, you can leave the rest unchanged.
 
 you also need to download Node.js v12.0.0 or newer and FFMPEG otherwise the bot wont be able to play sounds through the voice channel.
+
+## Adding sounds
+
+to add a sound simply add an mp3 file to the sounds folder. you don't have to restart the bot, it will work instantly.
 
 ## commands
 
@@ -23,11 +28,8 @@ also you can just play a random sound from the available sounds with:
 ```
 !random
 ```
-
-
-
-
 ## Thank you
+
 im still new to the Discord bot programming world so if I made any mistake please tell me by opening an issue.  
   
   Also if you need direct help from me Im happy to help you, just add me in discord  
