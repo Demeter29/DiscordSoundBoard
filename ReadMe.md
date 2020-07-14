@@ -32,9 +32,10 @@ If you want to bot to stay in the voice channel so you won't hear the annoying j
 ```
 sb!stay Bruh
 ```
-sWhen you want the bot to leave, use the leave command
+When you want the bot to leave, use the leave command
 ```
 sb!leave
+```
 ## Thank you
 
 im still new to the Discord bot programming world so if I made any mistake please tell me by opening an issue.  
