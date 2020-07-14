@@ -35,7 +35,7 @@ bot.on("message", message => {
         stay=true;
     }
    
-//
+
     switch (args[0]) {
         case process.env.LIST:
             bot.commands.get("list").execute(message);
