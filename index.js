@@ -1,90 +1,55 @@
 const Discord = require("discord.js");
-const client = new Discord.Client();
+const bot = new Discord.Client();
 const fs = require('fs');
 require('dotenv').config();
 const prefix = process.env.PREFIX;
-const Folder = process.env.FOLDER;
-let ready=true;
+global.ready = true;
+global.stay = false;
+bot.commands = new Discord.Collection();
+const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
+for (const file of commandFiles) {
+    const command = require(`./commands/${file}`);
+    bot.commands.set(command.name, command);   
+}
 
-
-client.on("ready", () => {
+bot.on("ready", () => {
     console.log("im ready")
-    client.user.setActivity(process.env.GAME, { type: process.env.TYPE });
-    
+    bot.user.setActivity(process.env.GAME, { type: process.env.TYPE });
 });
 
-client.on("message", async message => {
-
+bot.on("message", message => {
     if (!message.content.startsWith(prefix)) return;
-    if (!ready) return;
-    
 
-    
-    var VC = message.member.voice.channel;
-    var TC = message.channel;
-    command = message.content.substring(prefix.length);
-
-    
-
-    if (command == process.env.LIST) {
-        let output = "```";
-        fs.readdir(Folder, (err, files) => {
-            files.forEach(file => {
-                output += "\n" + file.substring(0, file.indexOf(".mp3"));
-            });
-            output += "```"
-            TC.send(output)
-        });
+    let args= message.content.slice(prefix.length).split(" ");
+    var VC=message.member.voice.channel;
+    try{
+        message.guild.voice.channel
+        var botOnVC=true;
+    }catch(err){
+        var botOnVC=false;
     }
+    console.log(botOnVC)
 
-    
-
-    
-    else if(command=="random"){
-
-        ready=false;
-        if(!VC) return message.channel.send(process.env.NOVC);
-        
-        fs.readdir(Folder, (err, files) => {
-            var toPlay=Math.floor(Math.random()* (files.length-1))+1;
-            for(let i=0; i<files.length; i++){
-                if(i==toPlay){
-                    ready=false;
-                    VC.join().then(connection => {
-                        dispatcher = connection.play("./sounds/" + files[i]);
-                        dispatcher.on("finish", finish => {
-                            VC.leave();
-                            ready=true;
-                        });
-                    }).catch(err => console.log(err)); 
-                    break;
-                }
-            };
-        });
-
+    if(args[0] == "stay"){
+        args[0] = args[1];
+        stay=true;
     }
-    else {
-        if(!VC)  return message.channel.send(process.env.NOVC);
-        
-
-        fs.readdir(Folder, (err, files) => {
-            for(let i=0; i<files.length; i++){
-                if (command == files[i].substring(0, files[i].indexOf(".mp3"))) {
-                    ready=false;
-                    VC.join().then(connection => {
-                        dispatcher = connection.play("./sounds/" + files[i]);
-                        dispatcher.on("finish", finish => {
-                            VC.leave();
-                            ready=true;
-                        });
-                    }).catch(err => console.log(err));
-                    break;
-                }
-            };
-        });
-    }
-
    
+
+    switch (args[0]) {
+        case process.env.LIST:
+            bot.commands.get("list").execute(message);
+            break;
+        case "random":
+            bot.commands.get("playRandom").execute(message,VC.botOnVC);
+            break;
+        case "leave":
+            bot.commands.get("leave").execute(message,stay,VC);
+            break;
+        default:
+            bot.commands.get("play").execute(message,args,VC,botOnVC);
+    }
 });
 
-client.login(process.env.TOKEN);
+
+bot.login(process.env.TOKEN);
