@@ -28,7 +28,6 @@ bot.on("message", message => {
     }catch(err){
         var botOnVC=false;
     }
-    console.log(botOnVC)
 
     if(args[0] == "stay"){
         args[0] = args[1];
