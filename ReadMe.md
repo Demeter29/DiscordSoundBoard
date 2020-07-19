@@ -15,7 +15,7 @@ to add a sound simply add an mp3 file to the sounds folder. you don't have to re
 
 ## commands
 
-to play a sound simply type <prefix><name of the sound>  
+to play a sound simply type '<prefix><name of the sound>'
 so for example if the prefix is 'sb!' and the mp3 file's name is honk.mp3 then simply type  
 ```
 sb!Bruh
