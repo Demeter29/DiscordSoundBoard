@@ -16,7 +16,7 @@ to add a sound simply add an mp3 file to the sounds folder. you don't have to re
 ## commands
 
 to play a sound simply type [prefix][name of the sound]
-so for example if the prefix is 'sb!' and the mp3 file's name is honk.mp3 then simply type  
+so for example if the prefix is 'sb!' and the mp3 file's name is Bruh.mp3 then simply type  
 ```
 sb!Bruh
 ```
@@ -28,7 +28,7 @@ also you can just play a random sound from the available sounds with:
 ```
 sb!random
 ```
-If you want to bot to stay in the voice channel so you won't hear the annoying joining/leaving sound you can just simply use <prefix> stay <sound name>
+If you want the bot to stay in the voice channel so you won't hear the annoying joining/leaving sound you can just simply use [prefix]stay [sound name]
 ```
 sb!stay Bruh
 ```
@@ -36,10 +36,8 @@ When you want the bot to leave, use the leave command
 ```
 sb!leave
 ```
-## Thank you
-
-im still new to the Discord bot programming world so if I made any mistake please tell me by opening an issue.  
+## Thank you 
   
-  Also if you need direct help from me Im happy to help you, just add me in discord  
+  If you need direct help from me Im happy to help you, just add me in discord  
   my username is Doggi#4758
 
